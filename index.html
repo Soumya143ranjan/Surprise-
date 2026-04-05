@@ -1,46 +1,149 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>System Access</title>
+  <title>System Breach</title>
   <style>
     body {
+      margin: 0;
       background: black;
       color: #00ff00;
       font-family: monospace;
-      text-align: center;
-      padding-top: 100px;
+      overflow: hidden;
     }
-    .hidden {
+
+    #intro {
+      position: absolute;
+      width: 100%;
+      top: 40%;
+      text-align: center;
+      font-size: 35px;
+      color: white;
+      animation: glitch 1s infinite;
+    }
+
+    #terminal {
       display: none;
+      padding: 20px;
+      height: 100vh;
+      white-space: pre-line;
+    }
+
+    #alert {
+      position: absolute;
+      top: 20%;
+      width: 100%;
+      text-align: center;
+      font-size: 30px;
+      color: red;
+      display: none;
+      animation: glitch 0.3s infinite;
+    }
+
+    #final {
+      position: absolute;
+      top: 40%;
+      width: 100%;
+      text-align: center;
+      font-size: 35px;
+      color: red;
+      display: none;
+      animation: glitch 0.5s infinite;
+    }
+
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      25% { transform: translate(-2px,2px); }
+      50% { transform: translate(2px,-2px); }
+      75% { transform: translate(-2px,0); }
+      100% { transform: translate(0); }
+    }
+
+    .flicker {
+      animation: flicker 0.2s infinite;
+    }
+
+    @keyframes flicker {
+      0% {opacity:1;}
+      50% {opacity:0.6;}
+      100% {opacity:1;}
     }
   </style>
 </head>
-<body>
+<body class="flicker">
 
-<h1 id="text">Initializing...</h1>
+<div id="intro">⚡ SURPRISE BY MR. SR MOHANTY ⚡</div>
+<div id="terminal"></div>
+<div id="alert">⚠ SYSTEM BREACH DETECTED ⚠<br>⚠ SECURITY FAILURE ⚠</div>
+<div id="final">💀 HACKED BY MR. SR MOHANTY 💀</div>
+
+<audio id="sound" src="https://www.soundjay.com/button/beep-07.wav"></audio>
 
 <script>
-let messages = [
-  "Accessing system...",
+let intro = document.getElementById("intro");
+let terminal = document.getElementById("terminal");
+let alertBox = document.getElementById("alert");
+let final = document.getElementById("final");
+let sound = document.getElementById("sound");
+
+setTimeout(() => {
+  intro.style.display = "none";
+  terminal.style.display = "block";
+  startHack();
+}, 2500);
+
+// hacker lines
+let lines = [
+  "Initializing system...",
+  "Access granted...",
   "Scanning device...",
-  "Bypassing security...",
+  "Bypassing firewall...",
   "Injecting payload...",
-  "Almost done..."
+  "Decrypting data..."
 ];
 
 let i = 0;
 
-function showText() {
-  if (i < messages.length) {
-    document.getElementById("text").innerHTML = messages[i];
-    i++;
-    setTimeout(showText, 1500);
-  } else {
-    document.getElementById("text").innerHTML = "💀 Hacked by MR. SR MOHANTY 💀";
+function startHack() {
+  function typeLine() {
+    if (i < lines.length) {
+      terminal.innerHTML += lines[i] + "\\n";
+      i++;
+      setTimeout(typeLine, 300);
+    }
   }
-}
+  typeLine();
 
-showText();
+  // code rain
+  setInterval(() => {
+    let chars = "01#$%^&*";
+    let random = "";
+    for (let i = 0; i < 60; i++) {
+      random += chars[Math.floor(Math.random()*chars.length)];
+    }
+    terminal.innerHTML += random + "\\n";
+    terminal.scrollTop = terminal.scrollHeight;
+  }, 80);
+
+  // shock moment after 4 sec
+  setTimeout(() => {
+    alertBox.style.display = "block";
+
+    // vibration
+    if (navigator.vibrate) {
+      navigator.vibrate([300,100,300,100,500]);
+    }
+
+    // sound
+    sound.play().catch(()=>{});
+
+  }, 4000);
+
+  // final reveal
+  setTimeout(() => {
+    alertBox.style.display = "none";
+    final.style.display = "block";
+  }, 7000);
+}
 </script>
 
 </body>
