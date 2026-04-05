@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>System Access</title>
+  <style>
+    body {
+      background: black;
+      color: #00ff00;
+      font-family: monospace;
+      text-align: center;
+      padding-top: 100px;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<h1 id="text">Initializing...</h1>
+
+<script>
+let messages = [
+  "Accessing system...",
+  "Scanning device...",
+  "Bypassing security...",
+  "Injecting payload...",
+  "Almost done..."
+];
+
+let i = 0;
+
+function showText() {
+  if (i < messages.length) {
+    document.getElementById("text").innerHTML = messages[i];
+    i++;
+    setTimeout(showText, 1500);
+  } else {
+    document.getElementById("text").innerHTML = "💀 Hacked by MR. SR MOHANTY 💀";
+  }
+}
+
+showText();
+</script>
+
+</body>
+</html>
