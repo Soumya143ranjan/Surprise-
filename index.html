@@ -18,6 +18,7 @@
       text-align: center;
       font-size: 35px;
       color: white;
+      cursor: pointer;
       animation: glitch 1s infinite;
     }
 
@@ -30,13 +31,12 @@
 
     #alert {
       position: absolute;
-      top: 20%;
+      top: 30%;
       width: 100%;
       text-align: center;
-      font-size: 30px;
+      font-size: 32px;
       color: red;
       display: none;
-      animation: glitch 0.3s infinite;
     }
 
     #final {
@@ -44,24 +44,105 @@
       top: 40%;
       width: 100%;
       text-align: center;
-      font-size: 35px;
+      font-size: 38px;
       color: red;
       display: none;
       animation: glitch 0.5s infinite;
     }
 
     @keyframes glitch {
-      0% { transform: translate(0); }
-      25% { transform: translate(-2px,2px); }
-      50% { transform: translate(2px,-2px); }
-      75% { transform: translate(-2px,0); }
-      100% { transform: translate(0); }
+      0% {transform: translate(0);}
+      25% {transform: translate(-2px,2px);}
+      50% {transform: translate(2px,-2px);}
+      75% {transform: translate(-2px,0);}
+      100% {transform: translate(0);}
     }
 
-    .flicker {
-      animation: flicker 0.2s infinite;
+    .redFlash {
+      background: red !important;
+      color: black !important;
+    }
+  </style>
+</head>
+<body>
+
+<div id="intro" onclick="startAll()">
+⚡ TAP TO UNLOCK SYSTEM ⚡
+</div>
+
+<div id="terminal"></div>
+
+<div id="alert">
+⚠ SYSTEM BREACH DETECTED ⚠<br>
+⚠ SECURITY FAILURE ⚠
+</div>
+
+<div id="final">
+💀 HACKED BY MR. SR MOHANTY 💀
+</div>
+
+<audio id="sound" src="https://www.soundjay.com/button/beep-07.wav"></audio>
+
+<script>
+let terminal = document.getElementById("terminal");
+let alertBox = document.getElementById("alert");
+let final = document.getElementById("final");
+let sound = document.getElementById("sound");
+
+// 👉 MAIN START FUNCTION (tap ke baad)
+function startAll() {
+
+  document.getElementById("intro").style.display = "none";
+  terminal.style.display = "block";
+
+  // Step 1: Surprise text (2 lines)
+  terminal.innerHTML += "Initializing system...\n";
+  setTimeout(() => {
+    terminal.innerHTML += "Access granted...\n";
+  }, 800);
+
+  // Step 2: Start coding after delay
+  setTimeout(startHack, 2000);
+
+}
+
+// 👉 Hacker coding
+function startHack() {
+
+  // Code rain
+  setInterval(() => {
+    let chars = "01#$%^&*";
+    let random = "";
+    for (let i = 0; i < 60; i++) {
+      random += chars[Math.floor(Math.random()*chars.length)];
+    }
+    terminal.innerHTML += random + "\n";
+    terminal.scrollTop = terminal.scrollHeight;
+  }, 100);
+
+  // Shock moment
+  setTimeout(() => {
+    alertBox.style.display = "block";
+    document.body.classList.add("redFlash");
+
+    // vibration
+    if (navigator.vibrate) {
+      navigator.vibrate([400,200,400]);
     }
 
-    @keyframes flicker {
-      0% {opacity:1;}
-      50% {opacity:0.6;}
+    // sound
+    sound.play().catch(()=>{});
+
+  }, 3000);
+
+  // Final text
+  setTimeout(() => {
+    alertBox.style.display = "none";
+    document.body.classList.remove("redFlash");
+    final.style.display = "block";
+  }, 6000);
+}
+</script>
+
+</body>
+</html>
